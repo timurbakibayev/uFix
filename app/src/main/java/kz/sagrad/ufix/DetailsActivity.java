@@ -7,15 +7,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -63,11 +62,9 @@ public class DetailsActivity extends AppCompatActivity {
         UFix.ref.child("youfix/offers/"+orderItem.id).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.w(TAG, "onChildAdded: try");
                 try {
                     Offer offer = dataSnapshot.getValue(Offer.class);
                     addOffer(offer,(LinearLayout)findViewById(R.id.priceLL));
-                    Log.w(TAG, "onChildAdded: OK");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -142,18 +139,16 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void addOffer(final Offer offer, LinearLayout oll) {
-        LinearLayout offerLL = new LinearLayout(this);
-        offerLL.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        offerLL.setLayoutParams(new CollapsingToolbarLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+        LayoutInflater li = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        offerLL.setOrientation(LinearLayout.VERTICAL);
-        TextView anotherOffer = new TextView(this);
-        anotherOffer.setText(offer.name + ":" + offer.price + " тенге");
-        Button call = new Button(this);
-        call.setLayoutParams(new CollapsingToolbarLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        call.setText(offer.name + ":" + offer.price + " тенге \n" + "Набрать номер:" + offer.phone);
+        FrameLayout frameLayout =  (FrameLayout)li.inflate(R.layout.bubble, null);
+
+        TextView anotherOffer = (TextView)frameLayout.findViewById(R.id.textInBubble);
+        anotherOffer.setText(offer.name + ":" + offer.price + " тенге\n" + offer.comment);
+
+        ImageView call = (ImageView)frameLayout.findViewById(R.id.user_img);
+
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,8 +160,6 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             }
         });
-        offerLL.addView(anotherOffer);
-        offerLL.addView(call);
-        oll.addView(offerLL);
+        oll.addView(frameLayout);
     }
 }

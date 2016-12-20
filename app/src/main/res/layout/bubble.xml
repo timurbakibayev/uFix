@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/even_container"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView android:id="@+id/user_img"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.29"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/mechanic"/>
+
+            <TextView android:id="@+id/textInBubble"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_alignParentRight="true"
+                android:textColor="#000000"
+                android:layout_weight="0.8"
+                android:background="@drawable/simple_rect_bubble"
+                android:textSize="15dip"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="50dip"
+                android:text="Я готов отремонтировать ваш автомобиль в кратчайшие сроки!  lkdsj lka jdslk jsalkdj lkas dlk jaslkdj alksjdf ;lka jds;lkfj dsa;lf j;lkdsa jflksa jdlkfj lkj lkds jflk jdslkjs"
+                android:layout_marginTop="10dip" />
+    </LinearLayout>
+</FrameLayout>

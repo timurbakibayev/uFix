@@ -87,7 +87,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-        }
+        } else if (requestCode == 7){
+            Intent menu = new Intent(me, OrdersActivity.class);
+            me.startActivityForResult(menu,7);
+        } else
+            Log.w(TAG, "onActivityResult: Where am I coming from? :(");
     }
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
@@ -144,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                             Intent menu = new Intent(me, OrdersActivity.class);
                             UFix.savePref("name",acct.getDisplayName());
                             UFix.savePref("email",acct.getEmail());
-                            me.startActivity(menu);
+                            me.startActivityForResult(menu,7);
                         }
                         // ...
                     }
