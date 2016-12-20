@@ -43,10 +43,20 @@ public class DetailsActivity extends AppCompatActivity {
 
         //orderItem
         ((TextView) findViewById(R.id.form_name1)).setText(orderItem.ownerName);
-        ((TextView) findViewById(R.id.form_auto1)).setText(orderItem.autoBrand);
+        ((TextView) findViewById(R.id.form_auto1)).setText(orderItem.autoBrand + orderItem.year);
         ((TextView) findViewById(R.id.form_description1)).setText(orderItem.details);
         ((TextView) findViewById(R.id.form_phone1)).setText(orderItem.phone);
-        ((TextView) findViewById(R.id.form_year1)).setText(orderItem.year);
+        findViewById(R.id.form_phone1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uri = "tel:" + orderItem.phone;
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse(uri));
+                if (ActivityCompat.checkSelfPermission(thisActivity, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(intent);
+                }
+            }
+        });
         ((TextView) findViewById(R.id.form_city1)).setText(orderItem.city);
 
         (findViewById(R.id.button_make_offer)).setOnClickListener(new View.OnClickListener() {

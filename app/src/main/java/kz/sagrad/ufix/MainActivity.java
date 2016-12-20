@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         } else
             Log.w(TAG, "onActivityResult: Where am I coming from? :(");
     }
+
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         } else {
             // Signed out, show unauthenticated UI.
             //updateUI(false);
+            signIn();
         }
     }
 
