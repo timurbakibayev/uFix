@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +42,7 @@ public class CameraAndPictures {
                             final ImageView theImageView = new ImageView(rootView.getContext());
                             theImageView.setImageBitmap(thePicture);
                             theImageView.setMinimumWidth(rootView.getWidth());
+                            theImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                             theImageView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -66,6 +68,10 @@ public class CameraAndPictures {
                                 }
                             });
                             rootView.addView(theImageView);
+                            TextView textView = new TextView(rootView.getContext());
+                            textView.setTextSize(20);
+                            textView.setText(" ");
+                            rootView.addView(textView);
                             //((LinearLayout) rootView.findViewById(R.id.mainLayout)).addView(theImageView);
                         }
                     }

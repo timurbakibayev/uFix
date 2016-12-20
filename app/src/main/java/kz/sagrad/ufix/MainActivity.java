@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             GoogleSignInAccount acct = result.getSignInAccount();
             TextView mStatusTextView = (TextView)findViewById(R.id.statusTextView);
             mStatusTextView.setText("Signed in as " + acct.getDisplayName());
-            GoogleSignInAccount account = result.getSignInAccount();
-            firebaseAuthWithGoogle(account);
+            //GoogleSignInAccount account = result.getSignInAccount();
+            firebaseAuthWithGoogle(acct);
             //updateUI(true);
         } else {
             // Signed out, show unauthenticated UI.
