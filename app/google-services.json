@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "751622398080",
+    "firebase_url": "https://ufix-77ef5.firebaseio.com",
+    "project_id": "ufix-77ef5",
+    "storage_bucket": "ufix-77ef5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751622398080:android:bda679691ff7509e",
+        "android_client_info": {
+          "package_name": "kz.sagrad.ufix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751622398080-o6n1mndeipopt73mh0l2q52if1uhhutf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANHZfscSU3juKDwSk6xT87efP2fOhcuCI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
