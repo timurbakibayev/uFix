@@ -34,4 +34,10 @@
         <item>Талды-Корган</item>
     </string-array>
 
+
+    <string name="city">Город</string>
+    <string name="client">Заказчик</string>
+    <string name="phone">Телефон</string>
+    <string name="description">Описание : </string>
+    <string name="offers">Предложения : </string>
 </resources>

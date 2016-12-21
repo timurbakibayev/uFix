@@ -40,7 +40,7 @@ public class OrdersActivity extends AppCompatActivity {
         BaseAdapter ordersAdapter = new OrdersAdapter(this);
         UFix.ordersAdapter = ordersAdapter;
         UFix.orderItems = new ArrayList<>();
-        ((ListView)findViewById(R.id.ordersListView)).setAdapter(ordersAdapter);
+        ((ListView)findViewById(R.id.orders_list_view)).setAdapter(ordersAdapter);
         startReadingOrders();
         grantPermissions();
     }

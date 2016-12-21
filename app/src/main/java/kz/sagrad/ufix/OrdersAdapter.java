@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Timur_hnimdvi on 20-Dec-16.
@@ -44,10 +47,12 @@ public class OrdersAdapter extends BaseAdapter {
         }
 
         final OrderItem p = getItem(i);
-
+        if (!p.photos.isEmpty())
+        CameraAndPictures.getPicFromFirebase(p.photos.get(0), (ImageView)view.findViewById(R.id.imageCallInListView));
         ((TextView)view.findViewById(R.id.textView1)).setText(p.autoBrand + "," + p.year);
         ((TextView)view.findViewById(R.id.textView2)).setText(p.details);
-        ((TextView)view.findViewById(R.id.textView3)).setText(p.photos.size() + " фото");
+        ((TextView)view.findViewById(R.id.textView3)).setText(String.valueOf(p.photos.size()));
+//        ((TextView)view.findViewById(R.id.textView3)).setText(p.photos.size() + " фото");
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

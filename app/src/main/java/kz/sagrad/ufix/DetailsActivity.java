@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -38,12 +39,24 @@ public class DetailsActivity extends AppCompatActivity {
         }
         if (orderItem == null)
             return;
-        for (String photoID : orderItem.photos)
-            CameraAndPictures.getPicFromFirebase(photoID, (LinearLayout) findViewById(R.id.photos_ll));
+//        for (String photoID : orderItem.photos)
+
+        ImageView photosLL = (ImageView) findViewById(R.id.photos_ll);
+        CameraAndPictures.getPicFromFirebase(orderItem.photos.get(0),photosLL);
+        photosLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(thisActivity, PhotoMasterActivity.class);
+                intent.putExtra("PHOTOS", orderItem.photos);
+                startActivity(intent);
+//                startActivity(new Intent(thisActivity, PhotoMasterActivity.class));
+//                Toast.makeText(thisActivity, "Photo is clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //orderItem
         ((TextView) findViewById(R.id.form_name1)).setText(orderItem.ownerName);
-        ((TextView) findViewById(R.id.form_auto1)).setText(orderItem.autoBrand + orderItem.year);
+        ((TextView) findViewById(R.id.form_auto1)).setText(orderItem.autoBrand + " , " + orderItem.year);
         ((TextView) findViewById(R.id.form_description1)).setText(orderItem.details);
         ((TextView) findViewById(R.id.form_phone1)).setText(orderItem.phone);
         findViewById(R.id.form_phone1).setOnClickListener(new View.OnClickListener() {
