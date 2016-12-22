@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class AddNew extends AppCompatActivity {
+public class AddNewActivity extends AppCompatActivity {
     OrderItem newOrderItem = new OrderItem();
 
 
@@ -131,7 +131,7 @@ public class AddNew extends AppCompatActivity {
         String description = ((EditText)findViewById(R.id.form_description)).getText().toString();
         String phone = ((EditText)findViewById(R.id.form_phone)).getText().toString();
         if (phone.trim().equals("")) {
-            Toast.makeText(AddNew.this, "Пожалуйста, введите номер телефона", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddNewActivity.this, "Пожалуйста, введите номер телефона", Toast.LENGTH_SHORT).show();
             return;
         }
         String city = ((Spinner)findViewById(R.id.form_city)).getSelectedItem().toString();

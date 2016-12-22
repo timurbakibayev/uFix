@@ -11,6 +11,7 @@
     <color name="white">#FFF</color>
     <color name="black">#000</color>
     <color name="green">#090</color>
+    <color name="lightSecondary">#66979797</color>
 </resources>
 
 

@@ -34,7 +34,7 @@
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoTitle" />
         <activity
-            android:name=".AddNew"
+            android:name=".AddNewActivity"
             android:label="@string/title_activity_add_new"
             android:theme="@style/AppTheme.NoTitle" />
         <activity

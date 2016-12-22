@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -24,10 +25,13 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
+import java.util.ArrayList;
+
 public class DetailsActivity extends AppCompatActivity {
     public static String TAG = "DetailsActivity";
     OrderItem orderItem;
     DetailsActivity thisActivity = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +44,20 @@ public class DetailsActivity extends AppCompatActivity {
         if (orderItem == null)
             return;
 //        for (String photoID : orderItem.photos)
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        ArrayList<String> items = (orderItem.photos.size() > 0) ?
+                orderItem.photos : null;
 
         ImageView photosLL = (ImageView) findViewById(R.id.photos_ll);
-        CameraAndPictures.getPicFromFirebase(orderItem.photos.get(0),photosLL);
-        photosLL.setOnClickListener(new View.OnClickListener() {
+        if (orderItem.photos.size() > 0) {
+            CameraAndPictures.getPicFromFirebase(orderItem.photos.get(0), photosLL);
+        } else {
+            viewPager.setAdapter(new ImageScrollFragmentAdapter(getSupportFragmentManager(), items));
+            photosLL.setImageResource(R.drawable.tire_wrench);
+        }
+        viewPager.setAdapter(new ImageScrollFragmentAdapter(getSupportFragmentManager(),
+                items));
+        viewPager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(thisActivity, PhotoMasterActivity.class);
@@ -75,19 +89,19 @@ public class DetailsActivity extends AppCompatActivity {
         (findViewById(R.id.button_make_offer)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeAnOffer(thisActivity, (LinearLayout)findViewById(R.id.priceLL));
+                makeAnOffer(thisActivity, (LinearLayout) findViewById(R.id.priceLL));
             }
         });
         readOffers();
     }
 
     private void readOffers() {
-        UFix.ref.child("youfix/offers/"+orderItem.id).addChildEventListener(new ChildEventListener() {
+        UFix.ref.child("youfix/offers/" + orderItem.id).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 try {
                     Offer offer = dataSnapshot.getValue(Offer.class);
-                    addOffer(offer,(LinearLayout)findViewById(R.id.priceLL));
+                    addOffer(offer, (LinearLayout) findViewById(R.id.priceLL));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -149,14 +163,14 @@ public class DetailsActivity extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         if (!("" + phoneEditText.getText()).trim().equals(""))
-                            UFix.savePref("phone",""+phoneEditText.getText());
+                            UFix.savePref("phone", "" + phoneEditText.getText());
                         Offer offer = new Offer();
-                        offer.price = ""+priceEditText.getText();
-                        offer.phone = UFix.sharedPref.getString("phone","");
+                        offer.price = "" + priceEditText.getText();
+                        offer.phone = UFix.sharedPref.getString("phone", "");
                         offer.comment = "" + commentEditText.getText();
-                        offer.email = UFix.sharedPref.getString("email","");
-                        offer.name = UFix.sharedPref.getString("name","");
-                        UFix.ref.child("youfix/offers/"+orderItem.id +"/").push().setValue(offer);
+                        offer.email = UFix.sharedPref.getString("email", "");
+                        offer.name = UFix.sharedPref.getString("name", "");
+                        UFix.ref.child("youfix/offers/" + orderItem.id + "/").push().setValue(offer);
                     }
                 }).show();
     }
@@ -165,12 +179,12 @@ public class DetailsActivity extends AppCompatActivity {
         LayoutInflater li = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        FrameLayout frameLayout =  (FrameLayout)li.inflate(R.layout.bubble, null);
+        FrameLayout frameLayout = (FrameLayout) li.inflate(R.layout.bubble, null);
 
-        TextView anotherOffer = (TextView)frameLayout.findViewById(R.id.textInBubble);
+        TextView anotherOffer = (TextView) frameLayout.findViewById(R.id.textInBubble);
         anotherOffer.setText(offer.name + ":" + offer.price + " тенге\n" + offer.comment);
 
-        ImageView call = (ImageView)frameLayout.findViewById(R.id.user_img);
+        ImageView call = (ImageView) frameLayout.findViewById(R.id.user_img);
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,5 +198,10 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
         oll.addView(frameLayout);
+    }
+    public void showMaster(View view){
+        Intent intent = new Intent(thisActivity, PhotoMasterActivity.class);
+        intent.putExtra("PHOTOS", orderItem.photos);
+        startActivity(intent);
     }
 }

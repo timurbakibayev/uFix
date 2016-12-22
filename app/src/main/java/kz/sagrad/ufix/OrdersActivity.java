@@ -32,7 +32,7 @@ public class OrdersActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addNew = new Intent(thisActivity,AddNew.class);
+                Intent addNew = new Intent(thisActivity,AddNewActivity.class);
                 thisActivity.startActivity(addNew);
             }
         });
