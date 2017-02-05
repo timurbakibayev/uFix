@@ -41,7 +41,11 @@
             android:name=".DetailsActivity"
             android:theme="@style/AppTheme.NoTitle" />
         <activity android:name=".ScreenSlideActivity" />
-        <activity android:name=".PhotoMasterActivity"></activity>
+        <activity android:name=".PhotoMasterActivity" />
+        <activity
+            android:name=".ChatListActivity"
+            android:label="@string/title_activity_chat_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

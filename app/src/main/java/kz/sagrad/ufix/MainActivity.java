@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
+
     private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                             Toast.makeText(me, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Intent menu = new Intent(me, OrdersActivity.class);
+                            Intent menu = new Intent(me, ChatListActivity.class);
                             UFix.savePref("name",acct.getDisplayName());
                             UFix.savePref("email",acct.getEmail());
                             me.startActivityForResult(menu,7);

@@ -131,7 +131,6 @@
                 android:text="Отправить"
                 android:visibility="gone" />
 
-
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
